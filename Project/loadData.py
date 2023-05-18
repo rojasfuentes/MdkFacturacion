@@ -34,10 +34,12 @@ salidas_df['Estado'] = df_combinado['SHIP_TO_STATE']
 salidas_df['Vacio'] = vacio
 
 #Entradas
-drop_entradas_df = entradas_df[entradas_df['Documento'].str.startswith("11")]
-stock_entradas_df = entradas_df[~entradas_df['Documento'].str.startswith("11")]
+entradas_df['Index'] = entradas_df.index
+entradas_df['Vacio'] = vacio
+entradas_df['Inicio_Check_in'] = pd.to_datetime(entradas_df['Inicio_Check_in'], errors='coerce')
+entradas_df['Inicio_Check_in'].fillna(value=pd.NaT, inplace=True)
+entradas_df['Fecha Inicio R'] = entradas_df['Inicio_Check_in'].dt.date
+entradas_df['Hora de Recepción'] = entradas_df['Inicio_Check_in'].dt.time
 
-print(len(drop_entradas_df))
-print(len(stock_entradas_df))
-print(len(entradas_df))
+
 
