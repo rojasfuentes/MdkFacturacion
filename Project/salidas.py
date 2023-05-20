@@ -25,21 +25,3 @@ stock_df.columns = nombres_salidas
 stockEmergencias_df = stockEmergencias_df[columnas_necesarias]
 stockEmergencias_df.columns = nombres_salidas
 
-#Concentrado de stock
-resumen_stockdf = stock_df[['Fecha Nota','Total de Piezas']]
-resumen_stockdf = resumen_stockdf.groupby('Fecha Nota')['Total de Piezas'].sum().reset_index()
-resumen_stockdf['LIMITE DE PIEZAS (1170)']= 1170
-resumen_stockdf['Excedente']= resumen_stockdf['Total de Piezas'] - resumen_stockdf['LIMITE DE PIEZAS (1170)']
-stock_df.to_excel(r'C:\Users\JFROJAS\Desktop\Facturacion\Archive\Stock.xlsx', index=False)
-
-total_piezas = resumen_stockdf['Total de Piezas'].sum()
-total_nueva_columna = resumen_stockdf['Excedente'].sum()
-
-total_general = pd.DataFrame({'Fecha Nota': ['Total general'],
-                           'Total de Piezas': [total_piezas],
-                           'LIMITE DE PIEZAS (1170)': [''],
-                           'Excedente': [total_nueva_columna]})
-
-
-resumen_stockdf = resumen_stockdf._append(total_general, ignore_index=True)
-print(resumen_stockdf)
