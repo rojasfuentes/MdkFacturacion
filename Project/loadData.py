@@ -8,9 +8,9 @@ import pandas as pd
 #Columna vacia
 vacio= pd.Series([], dtype='float64')
 
-calidadOrd = r'C:\Users\JFROJAS\Desktop\Facturacion\Archive\Calidad de la orden.csv'
-salidas_path = r'C:\Users\JFROJAS\Desktop\Facturacion\Archive\Expediciones (Facturacion).csv'
-entradas_path = r'C:\Users\JFROJAS\Desktop\Facturacion\Archive\ITR SC (Detallado).csv'
+calidadOrd = r'C:\Users\Frida Colin\MdkFacturacion\Archive\Calidad de la orden.csv'
+salidas_path = r'C:\Users\Frida Colin\MdkFacturacion\Archive\Expediciones (Facturacion).csv'
+entradas_path = r'C:\Users\Frida Colin\MdkFacturacion\Archive\ITR SC (Detallado).csv'
 
 salidas_df = pd.read_csv(salidas_path, sep=',', encoding='latin-1',skiprows=2, low_memory=False)
 entradas_df = pd.read_csv(entradas_path, sep=',', low_memory=False)

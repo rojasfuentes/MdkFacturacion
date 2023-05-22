@@ -21,3 +21,12 @@ drop_entradas_df = drop_entradas_df[columnas_necesarias]
 drop_entradas_df.columns = nombres_entradas
 dropEmergencias_entradas_df = dropEmergencias_entradas_df[columnas_necesarias]
 dropEmergencias_entradas_df.columns = nombres_entradas
+
+stock_entradas_df['Unidades'] = stock_entradas_df['Unidades'].str.replace(',', '').astype(int)
+
+
+numEle_stockEntradas = stock_entradas_df['No'].count()
+sumLineas_stockEntradas = stock_entradas_df['Lineas'].sum()
+sumUnidades_stockEntradas = stock_entradas_df['Unidades'].sum()
+
+print('sumUnidades_stockEntradas: ', sumUnidades_stockEntradas)
