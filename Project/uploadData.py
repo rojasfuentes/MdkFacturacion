@@ -1,31 +1,13 @@
 import pandas as pd
-from openpyxl import load_workbook
-from salidas import drop_df, stock_df, dropEmergencias_df, stockEmergencias_df
-from entradas import stock_entradas_df, stockEmergencias_entradas_df, drop_entradas_df, dropEmergencias_entradas_df
-from resumenes import resumen_dropdf, resumen_entradasdf, resumen_stockdf
+import openpyxl
 
-format_path = r'C:\Users\Frida Colin\MdkFacturacion\Archive\Libro 1.xlsx'
-excel = pd.ExcelFile(format_path, engine='openpyxl')
 
-writer = pd.ExcelWriter(format_path, engine='openpyxl')
-writer.book = load_workbook(format_path)
+# Abre el archivo de Excel existente
+archivo_existente = r"C:\Users\JFROJAS\Desktop\Facturacion\Archive\PRUEBAA.xlsx"
+libro_existente = openpyxl.load_workbook(archivo_existente)
 
-# Entradas
-stock_entradas_df.to_excel(writer, sheet_name='ENTRADAS', index=False)
-stockEmergencias_entradas_df.to_excel(writer, sheet_name='ENTRADAS EMERGENTES', index=False)
-resumen_entradasdf.loc[:, 'Unidades'] = resumen_entradasdf.loc[:, 'Unidades'].astype(int)
-resumen_entradasdf.to_excel(writer, sheet_name='RESUMEN ENTRADAS', index=False, startrow=stockEmergencias_entradas_df.shape[0]+2)
-drop_entradas_df.to_excel(writer, sheet_name='ENTRADAS DROP', index=False)
+# Crea una nueva hoja
+nueva_hoja = libro_existente.create_sheet(title="Hoja1")
 
-# Salidas
-stock_df.to_excel(writer, sheet_name='SALIDAS STOCK', index=False)
-resumen_stockdf.to_excel(writer, sheet_name='RESUMEN SALIDAS', index=False, startrow=stock_df.shape[0]+2)
-stockEmergencias_df.to_excel(writer, sheet_name='EMERGENCIAS STOCK', index=False)
-dropEmergencias_df.to_excel(writer, sheet_name='EMERGENCIAS DROP', index=False)
-drop_df.to_excel(writer, sheet_name='SALIDAS DROP', index=False)
-resumen_dropdf.to_excel(writer, sheet_name='SALIDAS DROP', index=False, startrow=drop_df.shape[0]+2)
-
-# Guardar el archivo de Excel
-writer.save()
-writer.close()
-
+# Guarda los cambios en el archivo existente
+libro_existente.save(archivo_existente)

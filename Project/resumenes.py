@@ -37,7 +37,7 @@ resumen_dropdf = resumen_dropdf._append(total_general_drop, ignore_index=True)
 
 #Entradas
 resumen_entradasdf = drop_entradas_df[['Fecha de Inicio de Recepción','Unidades']]
-resumen_entradasdf['Unidades'] = resumen_entradasdf['Unidades'].astype(int)
+resumen_entradasdf.loc[:, 'Unidades'] = resumen_entradasdf['Unidades'].astype(int)
 resumen_entradasdf = resumen_entradasdf.groupby('Fecha de Inicio de Recepción')['Unidades'].sum().reset_index()
 resumen_entradasdf = resumen_entradasdf.dropna()
 resumen_entradasdf['LIMITE DE PIEZAS (1170)']= 1170
