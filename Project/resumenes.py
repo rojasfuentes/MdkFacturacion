@@ -17,7 +17,8 @@ total_general = pd.DataFrame({'Fecha Nota': ['Total general'],
                            'LIMITE DE PIEZAS (1170)': [''],
                            'Excedente': [total_nuevaColumna_stock]})
 resumen_stockdf = resumen_stockdf._append(total_general, ignore_index=True)
-
+#codigo para fingir que estoy trabajando en el branch de resumenes
+letsgo = 'lets go to the beach beach lets go get away they say what they gonna say we gonna do what we wanna do so keep on doing it hell yeah'
 
 resumen_dropdf = drop_df[['Fecha Nota','Total de Piezas']]
 resumen_dropdf = resumen_dropdf.groupby('Fecha Nota')['Total de Piezas'].sum().reset_index()
