@@ -24,3 +24,6 @@ stock_df.columns = nombres_salidas
 
 stockEmergencias_df = stockEmergencias_df[columnas_necesarias]
 stockEmergencias_df.columns = nombres_salidas
+
+sumTotalPiezas_stock = stock_df['Total de Piezas'].sum()
+sumTotalPiezas_stockEmergencias = stockEmergencias_df['Total de Piezas'].sum()
