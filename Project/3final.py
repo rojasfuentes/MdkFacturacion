@@ -26,7 +26,7 @@ dfcd = crear_dataframe("MANIPULACIÓN" , nombres)
 
 tarifa = [0.0782, 2094672.32, 27.76, 41.64, 1.22, 1.00, 336.05 ,388.40 ,1180.47 ,1086.32 ,1791.45, 20.96, 31.44, '20% adicional', 'Ver tablas', 'Ver tabla',311.62 ,44767.00 ,311.62, 30.42, 51.87 , 69.39 , 26.20 ]
 df1Tarifa = round(tarifa[1]* (1+tarifa[0]),2)
-df1.loc[len(df1)] = ['Facturación Mínima Garantizada', 'Por mes',df1Tarifa, '', '1','1',tarifa[1]]
+df1.loc[len(df1)] = ['Facturación Mínima Garantizada', 'Por mes',df1Tarifa, '', '1','1', '$ ' + tarifa[1]]
 
 
 df2Tarifa1 = round(tarifa[2]* (1+tarifa[0]),2)
@@ -164,14 +164,108 @@ dfcd.loc[len(dfcd)] = ['a) Cajas de entrada 24hrs','Por caja',dfcdTarifa1, dfcdV
 dfcd.loc[len(dfcd)] = ['c) Cajas de salida  24hrs','Por caja', dfcdTarifa2, dfcdVolumenes2, dfcdCantidadR2, dfcdCantidadC2,'$ ' + str(dfcdMonto2)]
 dfcd.loc[len(dfcd)] = ['d) Acondicionado por caja ','Por caja', dfcdTarifa3, dfcdVolumenes3, dfcdCantidadR3, dfcdCantidadC3,'$ ' + str(dfcdMonto3)]
 dfcd.loc[len(dfcd)] = ['d) Piezas inspeccionadas','Por pieza', dfcdTarifa4, dfcdVolumenes4, dfcdCantidadR4, dfcdCantidadC4,'$ ' + str(dfcdMonto4)]
-print(dfcd)
 
-""" print(df2)
-print(df3)
-print(df4)
-print(df5)
-print(df8)
-print(df9)
-print(df10)
-print(df11)
-print(dfcd) """
+
+df2nombres_columnas = df2.columns
+df2.loc[len(df2)] = df2.iloc[1]
+df2.loc[1] = df2.iloc[0]
+df2.iloc[0] = df2nombres_columnas
+df2nombres_columnas = df2.columns.tolist()
+df2nombres_columnas[0] = 'FMG'
+df2.columns = df2nombres_columnas
+
+
+df3nombres_columnas = df3.columns
+df3.loc[len(df3)] = df3.iloc[1]
+df3.loc[1] = df3.iloc[0]
+df3.iloc[0] = df3nombres_columnas
+df3nombres_columnas = df3.columns.tolist()
+df3nombres_columnas[0] = 'FMG'
+df3.columns = df3nombres_columnas
+
+df4nombres_columnas = df4.columns
+df4.loc[len(df4)] = df4.iloc[1]
+df4.loc[5] = df4.iloc[4]
+df4.loc[4] = df4.iloc[3]
+df4.loc[3] = df4.iloc[2]
+df4.loc[2] = df4.iloc[1]
+df4.loc[1] = df4.iloc[0]
+df4.iloc[0] = df4nombres_columnas
+df4nombres_columnas = df4.columns.tolist()
+df4nombres_columnas[0] = 'FMG'
+df4.columns = df4nombres_columnas
+
+df5nombres_columnas = df5.columns
+df5.loc[len(df5)] = df5.iloc[1]
+df5.loc[1] = df5.iloc[0]
+df5.iloc[0] = df5nombres_columnas
+df5nombres_columnas = df5.columns.tolist()
+df5nombres_columnas[0] = 'FMG'
+df5.columns = df5nombres_columnas
+
+df8nombres_columnas = df8.columns
+df8.loc[len(df8)] = df8.iloc[0]
+df8.loc[1] = df8.iloc[0]
+df8.iloc[0] = df8nombres_columnas
+df8nombres_columnas = df8.columns.tolist()
+df8nombres_columnas[0] = 'FMG'
+df8.columns = df8nombres_columnas
+
+df9nombres_columnas = df9.columns
+df9.loc[len(df9)] = df9.iloc[0]
+df9.loc[1] = df9.iloc[0]
+df9.iloc[0] = df9nombres_columnas
+df9nombres_columnas = df9.columns.tolist()
+df9nombres_columnas[0] = 'FMG'
+df9.columns = df9nombres_columnas
+
+df10nombres_columnas = df10.columns
+df10.loc[len(df10)] = df10.iloc[0]
+df10.loc[1] = df10.iloc[0]
+df10.iloc[0] = df10nombres_columnas
+df10nombres_columnas = df10.columns.tolist()
+df10nombres_columnas[0] = 'FMG'
+df10.columns = df10nombres_columnas
+
+df11nombres_columnas = df11.columns
+df11.loc[len(df11)] = df11.iloc[1]
+df11.loc[3] = df11.iloc[2]
+df11.loc[2] = df11.iloc[1]
+df11.loc[1] = df11.iloc[0]
+df11.iloc[0] = df11nombres_columnas
+df11nombres_columnas = df11.columns.tolist()
+df11nombres_columnas[0] = 'FMG'
+df11.columns = df11nombres_columnas
+
+dfcdnombres_columnas = dfcd.columns
+dfcd.loc[len(dfcd)] = dfcd.iloc[1]
+dfcd.loc[4] = dfcd.iloc[3]
+dfcd.loc[3] = dfcd.iloc[2]
+dfcd.loc[2] = dfcd.iloc[1]
+dfcd.loc[1] = dfcd.iloc[0]
+dfcd.iloc[0] = dfcdnombres_columnas
+dfcdnombres_columnas = dfcd.columns.tolist()
+dfcdnombres_columnas[0] = 'FMG'
+dfcd.columns = dfcdnombres_columnas
+
+dfvacio = crear_dataframe("FMG" , nombres)
+dfvacio.loc[len(dfvacio)] = ['','','','','','', '']
+df_concatenado = df1._append([dfvacio, df2, dfvacio, df3, dfvacio, df4, dfvacio, df5, dfvacio, df8, dfvacio, df9, dfvacio, df10, dfvacio, df11, dfvacio, dfcd], ignore_index=True)
+
+with pd.ExcelWriter("Cotización.xlsx", engine="openpyxl") as writer:
+    df_concatenado.to_excel(writer, index=False, sheet_name="Hoja1")
+    worksheet = writer.sheets["Hoja1"]
+    for column in worksheet.columns:
+        max_length = 0
+        column = list(column)  # Convertir la tupla a lista
+        column = [column[0]] + column[1:]
+        for cell in column:
+            try:
+                if len(str(cell.value)) > max_length:
+                    max_length = len(cell.value)
+            except:
+                pass
+        adjusted_width = (max_length + 1) * 1.05
+        worksheet.column_dimensions[column[0].column_letter].width = adjusted_width
+    writer.save()
+

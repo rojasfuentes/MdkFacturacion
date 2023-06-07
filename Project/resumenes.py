@@ -1,5 +1,5 @@
-from salidas import stock_df, drop_df
-from entradas import drop_entradas_df
+from salidas import stock_df, drop_df, final_stock_df, final_drop_df
+from entradas import drop_entradas_df, final_drop_entradas_df
 import pandas as pd
 
 #Salidas
@@ -58,3 +58,13 @@ resumen_entradasdf = resumen_entradasdf._append(total_general_entradas, ignore_i
 #print(resumen_dropdf)
 #print(resumen_entradasdf)
 
+blank_column = pd.DataFrame({'Blank': [''] * len(final_drop_entradas_df)})
+resultED = pd.concat([final_drop_entradas_df, blank_column, resumen_entradasdf], axis=1)
+
+blank_columnSStock = pd.DataFrame({'Blank': [''] * len(final_stock_df)})
+resultSS = pd.concat([final_stock_df, blank_columnSStock, resumen_stockdf], axis=1)
+
+blank_columnSDrop = pd.DataFrame({'Blank': [''] * len(final_drop_df)})
+resultSD = pd.concat([final_drop_df, blank_columnSDrop, resumen_dropdf], axis=1)
+
+print(resultSD)

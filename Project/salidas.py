@@ -26,4 +26,26 @@ stockEmergencias_df = stockEmergencias_df[columnas_necesarias]
 stockEmergencias_df.columns = nombres_salidas
 
 sumTotalPiezas_stock = stock_df['Total de Piezas'].sum()
+sumaTotalLineas_stock = stock_df['Total de líneas'].sum()
+
 sumTotalPiezas_stockEmergencias = stockEmergencias_df['Total de Piezas'].sum()
+sumaTotalLineas_stockEmergencias = stockEmergencias_df['Total de líneas'].sum()
+
+sumTotalPiezas_drop = drop_df['Total de Piezas'].sum()
+sumaTotalLineas_drop = drop_df['Total de líneas'].sum()
+
+columns_dfStock = pd.DataFrame([stock_df.columns], columns=stock_df.columns)
+new_rowStock = pd.DataFrame([[stock_df['No.'].count(), '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', sumaTotalLineas_stock, sumTotalPiezas_stock, '', '', '', '', '']], columns=stock_df.columns)
+final_stock_df = pd.concat([new_rowStock, stock_df, columns_dfStock], ignore_index=True)
+
+columns_dfStockE = pd.DataFrame([stockEmergencias_df.columns], columns=stockEmergencias_df.columns)
+new_rowStockE = pd.DataFrame([[stockEmergencias_df['No.'].count(), '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', sumaTotalLineas_stockEmergencias, sumTotalPiezas_stockEmergencias, '', '', '', '', '']], columns=stockEmergencias_df.columns)
+final_stockEmergencias_df = pd.concat([new_rowStockE, stockEmergencias_df, columns_dfStockE], ignore_index=True)
+
+columns_dfDrop = pd.DataFrame([drop_df.columns], columns=drop_df.columns)
+new_rowDrop = pd.DataFrame([[drop_df['No.'].count(), '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', sumaTotalLineas_drop, sumTotalPiezas_drop, '', '', '', '', '']], columns=drop_df.columns)
+final_drop_df = pd.concat([new_rowDrop, drop_df, columns_dfDrop], ignore_index=True)
+
+""" print(stock_df)
+print(final_stock_df) """
+print(final_drop_df)
